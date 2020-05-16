@@ -48,4 +48,10 @@ run-front:
 
 front-build:
 	docker-compose run --rm frontend yarn build
-	mv frontend/build backend/ 
+	cp -r frontend/build backend/
+	rm -rf frontend/build
+
+front-add:
+	docker-compose run --rm frontend npm add $(lib)
+	docker-compose down
+	docker-compose up --build
