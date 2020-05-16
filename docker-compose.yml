@@ -12,11 +12,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app/backend
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=clave_secreta
-      - DATABASE_TYPE=url
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    env_file: ./backend/core/.env
     ports:
       - "8000:8000"
     stdin_open: true

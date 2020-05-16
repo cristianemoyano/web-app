@@ -9,6 +9,17 @@ prune:
 up:
 	docker-compose up
 
+# HEROKU
+
+h-set:
+	heroku git:remote -a $(app)
+
+h-deploy:
+	git push heroku master
+
+h-stack:
+	heroku stack:set container
+
 # BACKEND APP
 
 build-back:
