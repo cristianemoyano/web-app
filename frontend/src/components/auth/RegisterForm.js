@@ -8,7 +8,6 @@ import { Field, reduxForm } from 'redux-form';
 import { register } from '../../actions/auth';
 import Message from '../common/Message'
 import {minLength, maxLength, required, passwordsMatch} from '../common/validations'
-import Captcha from '../common/Captcha'
 
 const minLength3 = minLength(3);
 const maxLength15 = maxLength(15);
@@ -84,11 +83,7 @@ class RegisterForm extends Component {
                       label='Confirm Password'
                       validate={[required, passwordsMatch]}
                     />
-                    <Field
-                      name='captcharesponse'
-                      component={Captcha}
-                      validate={[required]}
-                    />
+
                     <button className='ui primary button' disabled={pristine || submitting}>Register</button>
                   </form>
                   <p style={{ marginTop: '1rem' }}>
