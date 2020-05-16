@@ -29,6 +29,9 @@ back-migrate:
 back-migrations:
 	docker-compose run --rm backend pipenv run python manage.py makemigrations
 
+back-superuser:
+	docker-compose run --rm backend pipenv run python manage.py createsuperuser
+
 back-up:
 	docker-compose run --rm backend pipenv run python manage.py runserver 0.0.0.0:80000
 
@@ -42,3 +45,7 @@ build-front:
 
 run-front:
 	docker-compose run --rm frontend $(cmd)
+
+front-build:
+	docker-compose run --rm frontend yarn build
+	mv frontend/build backend/ 
