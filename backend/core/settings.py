@@ -35,6 +35,7 @@ DEBUG = bool(os.getenv("DEBUG"))
 ALLOWED_HOSTS = [
     '.herokuapp.com',
     '127.0.0.1',
+    'backend',
     '0.0.0.0',
     'localhost',
     'host.docker.internal',
