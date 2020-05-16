@@ -51,4 +51,4 @@ RUN DJANGO_SETTINGS_MODULE=core.settings \
 
 EXPOSE $PORT
 
-CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
+CMD pipenv run python backend/manage.py runserver 0.0.0.0:$PORT
