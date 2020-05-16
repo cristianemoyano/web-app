@@ -4,10 +4,12 @@ FROM python:3.7
 RUN apt-get -y install curl \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
   && apt-get install nodejs \
-  && curl -o- -L https://yarnpkg.com/install.sh | bash \
-  && pip install pipenv
+  && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
+
+# Install pipenv
+RUN pip install pipenv
 
 # Install Python dependencies
 COPY ./backend/Pipfile ./backend/Pipfile.lock /app/backend/
