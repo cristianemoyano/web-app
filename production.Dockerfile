@@ -46,8 +46,9 @@ RUN mkdir /app/backend/staticfiles
 WORKDIR /app/backend
 
 # migrate
-RUN pipenv run python manage.py migrate --settings=core.settings.prod
+RUN DATABASE_URL=$DATABASE_URL \
+  pipenv run python manage.py migrate --settings=core.settings.prod
 
 EXPOSE $PORT
 
-CMD pipenv run python manage.py runserver 0.0.0.0:$PORT --settings=core.settings.prod
+CMD DATABASE_URL=$DATABASE_URL pipenv run python manage.py runserver 0.0.0.0:$PORT --settings=core.settings.prod
