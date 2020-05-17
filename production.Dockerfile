@@ -43,12 +43,14 @@ RUN cp -r frontend/build/root backend/
 # Collect static files
 RUN mkdir /app/backend/staticfiles
 
+WORKDIR /app/backend
+
 # SECRET_KEY is only included here to avoid raising an error when generating static files.
 # Be sure to add a real SECRET_KEY config variable in Heroku.
 RUN DJANGO_SETTINGS_MODULE=core.settings \
   SECRET_KEY=somethingsupersecret \
-  pipenv run python backend/manage.py collectstatic --noinput
+  pipenv run python manage.py collectstatic --noinput
 
 EXPOSE $PORT
 
-CMD pipenv run python backend/manage.py runserver 0.0.0.0:$PORT
+CMD pipenv run python manage.py runserver 0.0.0.0:$PORT
