@@ -7,15 +7,6 @@ RUN apt-get -y install curl \
   && apt-get install nano \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
-WORKDIR /app/backend
-
-# Install pipenv
-RUN pip install pipenv
-
-# Install Python dependencies
-COPY ./backend/Pipfile ./backend/Pipfile.lock /app/backend/
-RUN pipenv install
-
 # Install JS dependencies
 WORKDIR /app/frontend
 
@@ -52,11 +43,14 @@ RUN mkdir /app/backend/staticfiles
 
 WORKDIR /app/backend
 
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
 RUN ["chmod", "+x", "deploy-tasks.sh"]
 
 # Uncomment to test it locally
-# EXPOSE 8000
+EXPOSE 8000
 
-EXPOSE $PORT
+# EXPOSE $PORT
 
 # CMD pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT

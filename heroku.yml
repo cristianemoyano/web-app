@@ -8,4 +8,4 @@ release:
     - ./deploy-tasks.sh
 
 run:
-  web: pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
+  web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT

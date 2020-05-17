@@ -2,12 +2,12 @@
 
 echo collecting statics..
 
-pipenv run python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 echo statics collected.
 
 echo executing migrations..
 
-pipenv run python manage.py migrate
+python manage.py migrate
 
 echo migrations executed.

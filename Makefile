@@ -27,6 +27,8 @@ h-stack:
 h-config:
 	heroku config:set DATABASE_URL=<config>
 
+h-shell:
+	heroku run bash
 # BACKEND APP
 
 back-build:
@@ -88,3 +90,8 @@ prod-shell:
 
 prod-task:
 	docker-compose run --rm prod ./deploy-tasks.sh
+
+prod-req:
+	docker-compose run --rm prod pipenv run pip freeze > requirements.txt
+	cp -r ./requirements.txt backend/requirements.txt
+	rm requirements.txt

@@ -39,6 +39,9 @@ services:
   # Container to test the prod build.
   prod:
     build: .
+    volumes:
+      # Used to generate the requirements.txt for prod.
+      - ./requirements.txt
     ports:
       - "8000:8000"
     stdin_open: true
@@ -51,7 +54,7 @@ services:
       - PYTHONUNBUFFERED=1
       - SECRET_KEY=clave_secreta
       - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
-    command: pipenv run gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   postgres_data:
