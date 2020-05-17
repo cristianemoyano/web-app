@@ -37,6 +37,12 @@ RUN mkdir root && mv *.ico *.js *.json root
 
 WORKDIR /app
 
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
+ENV DJANGO_SETTINGS_MODULE core.settings.prod
+
 # Copy builded files
 RUN cp -r frontend/build/root backend/
 
@@ -45,10 +51,4 @@ RUN mkdir /app/backend/staticfiles
 
 WORKDIR /app/backend
 
-# migrate
-RUN DATABASE_URL=$DATABASE_URL \
-  pipenv run python manage.py migrate --settings=core.settings.prod
-
 EXPOSE $PORT
-
-CMD DATABASE_URL=$DATABASE_URL pipenv run python manage.py runserver 0.0.0.0:$PORT --settings=core.settings.prod
