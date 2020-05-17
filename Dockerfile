@@ -49,8 +49,8 @@ RUN pip install -r requirements.txt
 RUN ["chmod", "+x", "deploy-tasks.sh"]
 
 # Uncomment to test it locally
-EXPOSE 8000
+# EXPOSE 8000
 
-# EXPOSE $PORT
+EXPOSE $PORT
 
 # CMD pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
