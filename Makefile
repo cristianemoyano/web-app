@@ -20,6 +20,9 @@ h-deploy:
 h-stack:
 	heroku stack:set container
 
+h-config:
+	heroku config:set DATABASE_URL=<config>
+
 # BACKEND APP
 
 build-back:
