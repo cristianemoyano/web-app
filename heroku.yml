@@ -1,10 +1,11 @@
 build:
   docker:
     web: production.Dockerfile
-run:
-  web: cd backend && gunicorn  --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
 
 release:
   image: web
   command:
-    - python manage.py collectstatic --noinput
+    - ./deployment_tasks.sh
+
+run:
+  web: cd backend && gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
