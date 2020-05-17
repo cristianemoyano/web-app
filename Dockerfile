@@ -1,9 +1,10 @@
 FROM python:3.7
 
-# Install curl, node, & yarn
+# Install curl, node, nano & yarn
 RUN apt-get -y install curl \
   && curl -sL https://deb.nodesource.com/setup_13.x | bash \
   && apt-get install nodejs \
+  && apt-get install nano \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
@@ -38,10 +39,10 @@ RUN mkdir root && mv *.ico *.js *.json root
 WORKDIR /app
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
-ENV DJANGO_SETTINGS_MODULE core.settings.prod
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
+# ENV DEBUG 0
+# ENV DJANGO_SETTINGS_MODULE core.settings.prod
 
 # Copy builded files
 RUN cp -r frontend/build/root backend/
@@ -51,4 +52,11 @@ RUN mkdir /app/backend/staticfiles
 
 WORKDIR /app/backend
 
+RUN ["chmod", "+x", "deploy-tasks.sh"]
+
+# Uncomment to test it locally
+# EXPOSE 8000
+
 EXPOSE $PORT
+
+# CMD pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT

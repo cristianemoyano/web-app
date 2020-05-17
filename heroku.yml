@@ -1,11 +1,11 @@
 build:
   docker:
-    web: production.Dockerfile
+    web: Dockerfile
 
 release:
   image: web
   command:
-    - ./deployment_tasks.sh
+    - ./deploy-tasks.sh
 
 run:
-  web: cd backend && gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
+  web: pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT

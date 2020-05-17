@@ -7,7 +7,11 @@ prune:
 	docker system prune
 
 up:
-	docker-compose up
+	docker-compose up -d db backend frontend
+	docker-compose logs -f
+
+stop:
+	docker-compose stop
 
 # HEROKU
 
@@ -25,16 +29,16 @@ h-config:
 
 # BACKEND APP
 
-build-back:
+back-build:
 	docker-compose build backend
 
 back-new-app:
 	docker-compose run --rm backend pipenv run python manage.py startapp $(app)
 
-shell-back:
+back-shell:
 	docker-compose run --rm backend /bin/sh
 
-run-back:
+back-run:
 	docker-compose run --rm backend $(cmd)
 
 back-migrate:
@@ -51,16 +55,16 @@ back-up:
 
 # FRONTEND APP
 
-shell-front:
+front-shell:
 	docker-compose run --rm frontend /bin/sh
 
-build-front:
+front-build:
 	docker-compose build frontend
 
-run-front:
+front-run:
 	docker-compose run --rm frontend $(cmd)
 
-front-build:
+front-build-assets:
 	docker-compose run --rm frontend yarn build
 	cp -r frontend/build backend/
 	rm -rf frontend/build
@@ -69,3 +73,18 @@ front-add:
 	docker-compose run --rm frontend npm add $(lib)
 	docker-compose down
 	docker-compose up --build
+
+# PROD
+
+prod-up:
+	docker-compose up -d db prod
+	docker-compose logs -f
+
+prod-build:
+	docker-compose build prod
+
+prod-shell:
+	docker-compose run --rm prod /bin/sh
+
+prod-task:
+	docker-compose run --rm prod ./deploy-tasks.sh

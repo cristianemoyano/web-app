@@ -35,6 +35,23 @@ services:
     depends_on:
       - backend
     command: npm start
+  
+  # Container to test the prod build.
+  prod:
+    build: .
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    environment:
+      - PORT=8000
+      - DJANGO_SETTINGS_MODULE=core.settings.prod
+      - PYTHONDONTWRITEBYTECODE=1
+      - DEBUG=0
+      - PYTHONUNBUFFERED=1
+      - SECRET_KEY=clave_secreta
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    command: pipenv run gunicorn core.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   postgres_data:

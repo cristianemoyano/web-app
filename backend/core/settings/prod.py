@@ -2,6 +2,7 @@ from .base import * # noqa
 
 DEBUG = False
 
+
 DATABASE_URL = str(os.getenv("DATABASE_URL"))
 
 DATABASES = {
