@@ -30,7 +30,7 @@ RSA_PUBLIC_KEY = str(os.getenv("RSA_PUBLIC_KEY")).replace("\\n", "\n")
 RECAPTCHA_SITE_KEY = os.getenv("RECAPTCHA_SITE_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv("DEBUG"))
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -107,9 +107,6 @@ DATABASES = {
     },
     'url': dj_database_url.parse(str(os.getenv("DATABASE_URL")), conn_max_age=600),
 }
-
-
-DATABASES['default'] = DATABASES[str(os.getenv("DATABASE_TYPE"))]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

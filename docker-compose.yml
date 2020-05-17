@@ -12,12 +12,12 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app/backend
-    env_file: ./backend/core/.env
+    env_file: ./backend/core/settings/.env
     ports:
       - "8000:8000"
     stdin_open: true
     tty: true
-    command: pipenv run python manage.py runserver 0.0.0.0:8000
+    command: pipenv run python manage.py runserver 0.0.0.0:8000 --settings=core.settings.dev
     depends_on:
         - db
   frontend:

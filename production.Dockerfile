@@ -47,9 +47,7 @@ WORKDIR /app/backend
 
 # SECRET_KEY is only included here to avoid raising an error when generating static files.
 # Be sure to add a real SECRET_KEY config variable in Heroku.
-RUN DJANGO_SETTINGS_MODULE=core.settings \
-  SECRET_KEY=somethingsupersecret \
-  pipenv run python manage.py collectstatic --noinput
+RUN pipenv run python manage.py --settings=core.settings.prod
 
 EXPOSE $PORT
 

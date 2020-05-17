@@ -44,7 +44,7 @@ back-superuser:
 	docker-compose run --rm backend pipenv run python manage.py createsuperuser
 
 back-up:
-	docker-compose run --rm backend pipenv run python manage.py runserver 0.0.0.0:80000
+	docker-compose run --rm backend pipenv run python manage.py runserver 0.0.0.0:80000 --settings=mysite.settings.dev
 
 # FRONTEND APP
 
