@@ -45,10 +45,9 @@ RUN mkdir /app/backend/staticfiles
 
 WORKDIR /app/backend
 
-# SECRET_KEY is only included here to avoid raising an error when generating static files.
-# Be sure to add a real SECRET_KEY config variable in Heroku.
-RUN pipenv run python manage.py --settings=core.settings.prod
+# migrate
+RUN pipenv run python manage.py migrate --settings=core.settings.prod
 
 EXPOSE $PORT
 
-CMD pipenv run python manage.py runserver 0.0.0.0:$PORT
+CMD pipenv run python manage.py runserver 0.0.0.0:$PORT --settings=core.settings.prod
