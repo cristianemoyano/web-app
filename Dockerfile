@@ -53,4 +53,4 @@ RUN ["chmod", "+x", "deploy-tasks.sh"]
 
 EXPOSE $PORT
 
-# CMD pipenv run gunicorn --env DJANGO_SETTINGS_MODULE=core.settings.prod core.wsgi:application --bind 0.0.0.0:$PORT
+CMD python manage.py runserver 0.0.0.0:$PORT
